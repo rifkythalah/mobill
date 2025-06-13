@@ -30,7 +30,7 @@ class AdminAuthController extends Controller
 
         Auth::login($user);
 
-        return redirect()->route('index'); 
+        return redirect()->route('admin.login'); 
     }
 
     public function showLoginForm()

@@ -27,7 +27,7 @@
        <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container px-5">
-        <a class="navbar-brand custom-font" href="{{ route('pengguna.index') }}">MotoRen</a>
+        <a class="navbar-brand custom-font" href="{{ route('dashboard') }}">MotoRen</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -63,7 +63,7 @@
 <!-- Page Heading -->
 <div class="mt-4 mb-4 d-sm-flex align-items-center justify-content-between">
     <h1 class="mb-0 text-gray-800 h3">Data Transaksi</h1>
-    <a href="{{ route('pengguna.index2') }}" class="shadow-sm d-none d-sm-inline-block btn btn-sm btn-primary ms-3">
+    <a href="{{ route('dashboard') }}" class="shadow-sm d-none d-sm-inline-block btn btn-sm btn-primary ms-3">
         <i class="fas fa-plus fa-sm text-white-50"></i> Tambah Transaksi
     </a>
 </div>

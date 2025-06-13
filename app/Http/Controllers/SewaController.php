@@ -74,11 +74,45 @@ class SewaController extends Controller
 
         return view('transaksi.index', compact('transaksis'));
     }
+
     public function destroy(Sewa $sewa)
-{
-    $sewa->delete();
+    {
+        $sewa->delete();
 
-    return redirect()->route('transaksi.index')->with('success', 'Transaksi berhasil dihapus!');
-}
+        return redirect()->route('transaksi.index')->with('success', 'Transaksi berhasil dihapus!');
+    }
 
+    // API: List semua riwayat sewa
+    public function apiIndex()
+    {
+        $riwayat = \App\Models\Sewa::all();
+        return response()->json($riwayat);
+    }
+
+    // API: Detail riwayat sewa
+    public function apiShow($id)
+    {
+        $riwayat = \App\Models\Sewa::find($id);
+        if (!$riwayat) {
+            return response()->json(['message' => 'Not found'], 404);
+        }
+        return response()->json($riwayat);
+    }
+
+    // API: Tambah riwayat sewa
+    public function apiStore(Request $request)
+    {
+        $data = $request->validate([
+            'user_id' => 'required|integer',
+            'kendaraan_id' => 'required|integer',
+            'nama_user' => 'required|string',
+            'harga' => 'required|numeric',
+            'tanggal_sewa' => 'required|date',
+            'tanggal_kembali' => 'required|date',
+            'total_harga' => 'required|numeric',
+            'merk_kendaraan' => 'required|string',
+        ]);
+        $riwayat = \App\Models\Sewa::create($data);
+        return response()->json($riwayat, 201);
+    }
 }

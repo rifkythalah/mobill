@@ -28,7 +28,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container px-5">
         <!-- Brand -->
-        <a class="navbar-brand custom-font" href="{{ route('pengguna.index') }}">MotoRen</a>
+        <a class="navbar-brand custom-font" href="{{ route('dashboard') }}">MotoRen</a>
 
         <!-- Toggle Button for Mobile View -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

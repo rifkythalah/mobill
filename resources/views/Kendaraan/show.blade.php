@@ -29,11 +29,11 @@
         <!-- Navigation -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
                 <div class="container px-5">
-                    <i><a class="navbar-brand custom-font" href="{{ route('pengguna.index')}}">MotoRen</a></i>
+                    <i><a class="navbar-brand custom-font" href="{{ route('dashboard') }}">MotoRen</a></i>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="mb-2 navbar-nav ms-auto mb-lg-0">
-                            <li class="nav-item"><a class="nav-link" href="{{ route('pengguna.index')}}">Home</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ route('dashboard')}}">Home</a></li>
                             <li class="nav-item"><a class="nav-link" href="{{ route('pengguna.about')}}">About</a></li>
                             <li class="nav-item"><a class="nav-link" href="{{ route('pengguna.faq')}}">FAQ</a></li>
                         @if(Auth::check() && Auth::user()->role === 'admin')
@@ -201,7 +201,7 @@
                 </div>
                 <br>
                 <!-- Post categories-->
-                <a class="mt-auto btn btn-primary custom-button" href="{{ route('pengguna.index2') }}">Kembali</a>
+                <a class="mt-auto btn btn-primary custom-button" href="{{ route('dashboard') }}">Kembali</a>
             </section>
         </div>
 

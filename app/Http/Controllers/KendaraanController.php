@@ -60,33 +60,33 @@ class KendaraanController extends Controller
         return view('kendaraan.edit', compact('kendaraan'));
     }
 
-public function update(Request $request, Kendaraan $kendaraan)
-{
-    // Validasi input, gambar tidak wajib diupdate
-    $validatedData = $request->validate([
-        'tanggal' => 'required|date',
-        'merk_kendaraan' => 'required|string|max:255',
-        'nomor_plat' => 'required|string|max:255',
-        'lokasi' => 'required|string|max:255',
-        'warna' => 'required|string|max:255',
-        'bahan_bakar' => 'required|string',
-        'status' => 'required|string',
-        'harga' => 'required|numeric',
-        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-    ]);
+    public function update(Request $request, Kendaraan $kendaraan)
+    {
+        // Validasi input, gambar tidak wajib diupdate
+        $validatedData = $request->validate([
+            'tanggal' => 'required|date',
+            'merk_kendaraan' => 'required|string|max:255',
+            'nomor_plat' => 'required|string|max:255',
+            'lokasi' => 'required|string|max:255',
+            'warna' => 'required|string|max:255',
+            'bahan_bakar' => 'required|string',
+            'status' => 'required|string',
+            'harga' => 'required|numeric',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
 
-    if ($request->hasFile('image')) {
-       
-        Storage::disk('public')->delete($kendaraan->image);
+        if ($request->hasFile('image')) {
+           
+            Storage::disk('public')->delete($kendaraan->image);
 
-        $imagePath = $request->file('image')->store('kendaraan_images', 'public');
-        $validatedData['image'] = $imagePath; 
+            $imagePath = $request->file('image')->store('kendaraan_images', 'public');
+            $validatedData['image'] = $imagePath; 
+        }
+
+        $kendaraan->update($validatedData);
+
+        return redirect()->route('kendaraan.index')->with('success', 'Data kendaraan berhasil diperbarui!');
     }
-
-    $kendaraan->update($validatedData);
-
-    return redirect()->route('kendaraan.index')->with('success', 'Data kendaraan berhasil diperbarui!');
-}
 
     public function destroy(Kendaraan $kendaraan)
     {
@@ -95,5 +95,62 @@ public function update(Request $request, Kendaraan $kendaraan)
         $kendaraan->delete();
 
         return redirect()->route('kendaraan.index')->with('success', 'Data kendaraan berhasil dihapus!');
+    }
+
+    // API: List semua kendaraan
+    public function apiIndex()
+    {
+        $kendaraan = Kendaraan::all();
+        return response()->json($kendaraan);
+    }
+
+    // API: Detail kendaraan
+    public function apiShow($id)
+    {
+        $kendaraan = Kendaraan::find($id);
+        if (!$kendaraan) {
+            return response()->json(['message' => 'Not found'], 404);
+        }
+        return response()->json($kendaraan);
+    }
+
+    // API: Tambah kendaraan (untuk admin)
+    public function apiStore(Request $request)
+    {
+        $data = $request->validate([
+            'tanggal' => 'required|date',
+            'image' => 'required|string',
+            'merk_kendaraan' => 'required|string',
+            'nomor_plat' => 'required|string',
+            'lokasi' => 'required|string',
+            'warna' => 'required|string',
+            'bahan_bakar' => 'required|string',
+            'status' => 'required|string',
+            'harga' => 'required|numeric',
+        ]);
+        $kendaraan = Kendaraan::create($data);
+        return response()->json($kendaraan, 201);
+    }
+
+    // API: Update kendaraan (untuk admin)
+    public function apiUpdate(Request $request, $id)
+    {
+        $kendaraan = Kendaraan::find($id);
+        if (!$kendaraan) {
+            return response()->json(['message' => 'Not found'], 404);
+        }
+        $kendaraan->update($request->all());
+        return response()->json($kendaraan);
+    }
+
+    // API: Hapus kendaraan (untuk admin)
+    public function apiDestroy($id)
+    {
+        $kendaraan = Kendaraan::find($id);
+        if (!$kendaraan) {
+            return response()->json(['message' => 'Not found'], 404);
+        }
+        $kendaraan->delete();
+        return response()->json(['message' => 'Deleted']);
     }
 }
