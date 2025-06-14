@@ -1,9 +1,10 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\KendaraanController;
 use App\Http\Controllers\SewaController;
 use App\Http\Controllers\UserController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 
 // Kendaraan API
 Route::get('/kendaraan', [KendaraanController::class, 'apiIndex']);
@@ -21,3 +22,9 @@ Route::get('/riwayat/{id}', [SewaController::class, 'apiShow']);
 Route::get('/user', [UserController::class, 'apiIndex']);
 Route::get('/user/{id}', [UserController::class, 'apiShow']);
 Route::put('/user/{id}', [UserController::class, 'apiUpdate']);
+
+// Auth API
+Route::post('/auth/register', [AuthController::class, 'register']);
+Route::post('/auth/login', [AuthController::class, 'login']);
+
+

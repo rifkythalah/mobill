@@ -33,6 +33,8 @@ Route::get('/transaksi', [SewaController::class, 'index'])->name('transaksi.inde
 Route::get('/transaksi/{sewa}/edit', [SewaController::class, 'edit'])->name('transaksi.edit');    
 Route::put('/transaksi/{sewa}', [SewaController::class, 'update'])->name('sewa.update');
 Route::delete('transaksi/{sewa}', [SewaController::class, 'destroy'])->name('transaksi.destroy');
+Route::get('/transaksi/create', [SewaController::class, 'create'])->name('transaksi.create');
+Route::post('/transaksi', [SewaController::class, 'store'])->name('transaksi.store');
 
 // CRUD User
 Route::get('/users', [UserController::class, 'index'])->name('users.index');
@@ -43,8 +45,6 @@ Route::post('/admin/register', [AdminAuthController::class, 'register']);
 Route::get('/admin/login', [AdminAuthController::class, 'showLoginForm'])->name('admin.login');
 Route::post('/admin/login', [AdminAuthController::class, 'login']);
 Route::post('/admin/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
-
-// Catatan: Untuk endpoint API, migrasikan ke routes/api.php
 
 Route::get('/', function () {
     return redirect()->route('admin.login');

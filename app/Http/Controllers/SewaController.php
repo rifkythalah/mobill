@@ -11,7 +11,8 @@ class SewaController extends Controller
 {
     public function create(Kendaraan $kendaraan = null)
     {
-        return view('sewa.create', compact('kendaraan'));
+        $kendaraans = Kendaraan::all();
+        return view('sewa.create', compact('kendaraans'));
     }
 
     public function store(Request $request)

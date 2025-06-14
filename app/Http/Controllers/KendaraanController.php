@@ -97,22 +97,20 @@ class KendaraanController extends Controller
         return redirect()->route('kendaraan.index')->with('success', 'Data kendaraan berhasil dihapus!');
     }
 
-    // API: List semua kendaraan
     public function apiIndex()
-    {
-        $kendaraan = Kendaraan::all();
-        return response()->json($kendaraan);
-    }
+{
+    $kendaraan = \App\Models\Kendaraan::all();
+    return response()->json($kendaraan);
+}
 
-    // API: Detail kendaraan
-    public function apiShow($id)
-    {
-        $kendaraan = Kendaraan::find($id);
-        if (!$kendaraan) {
-            return response()->json(['message' => 'Not found'], 404);
-        }
-        return response()->json($kendaraan);
+public function apiShow($id)
+{
+    $kendaraan = \App\Models\Kendaraan::find($id);
+    if (!$kendaraan) {
+        return response()->json(['message' => 'Not found'], 404);
     }
+    return response()->json($kendaraan);
+}
 
     // API: Tambah kendaraan (untuk admin)
     public function apiStore(Request $request)

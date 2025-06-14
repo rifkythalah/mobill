@@ -1,5 +1,4 @@
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -306,7 +305,6 @@
 
                         <!-- Nav Item - User Information -->
                         <div class="ms-auto d-flex align-items-center">
-                            <span class="mr-2">Welcome, <a href=""> {{ Auth::user()->name }}</a></span>
                             <a href="{{ route('profile.edit') }}" class="btn btn-primary btn-sm">Profile</a>
                         </div>
 

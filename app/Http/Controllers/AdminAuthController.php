@@ -45,6 +45,15 @@ class AdminAuthController extends Controller
 
         // Periksa kredensial login
         if (Auth::attempt($credentials)) {
+            // Set session user agar nama muncul di navbar
+            session(['user' => [
+                'data' => [
+                    'name' => Auth::user()->name,
+                    'email' => Auth::user()->email,
+                    'id' => Auth::user()->id,
+                    'role' => Auth::user()->role,
+                ]
+            ]]);
             // Redirect ke dashboard jika berhasil
             return redirect()->intended('/dashboard');
         }
@@ -56,6 +65,7 @@ class AdminAuthController extends Controller
     public function logout()
     {
         Auth::logout();
-        return redirect()->route('index');
+        session()->forget('user');
+        return redirect()->route('admin.login');
     }
 }

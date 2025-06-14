@@ -7,7 +7,7 @@
             <h4 class="mb-0">Form Sewa Kendaraan</h4>
         </div>
         <div class="card-body">
-            <form action="{{ route('sewa.store') }}" method="POST">
+            <form action="{{ route('transaksi.store') }}" method="POST">
                 @csrf
 
                 <!-- Nama Pengguna -->
@@ -19,21 +19,25 @@
 
                 <!-- ID Kendaraan -->
                 <div class="mb-3">
-                    <label for="kendaraan_id" class="form-label">ID Kendaraan</label>
-                    <input type="hidden" class="form-control" id="kendaraan_id" name="kendaraan_id" value="{{ $kendaraan->id }}">
-                    <input type="text" class="form-control" value="{{ $kendaraan->id }}" readonly>
+                    <label for="kendaraan_id">Kendaraan</label>
+                    <select id="kendaraan_id" name="kendaraan_id" class="form-control" required>
+                        <option value="">-- Pilih Kendaraan --</option>
+                        @foreach($kendaraans as $kendaraan)
+                            <option value="{{ $kendaraan->id }}">{{ $kendaraan->merk_kendaraan }} - {{ $kendaraan->nomor_plat }}</option>
+                        @endforeach
+                    </select>
                 </div>
 
                 <!-- Merk Kendaraan -->
                 <div class="mb-3">
                     <label for="merk_kendaraan" class="form-label">Merk Kendaraan</label>
-                    <input type="text" class="form-control" id="merk_kendaraan" name="merk_kendaraan" value="{{ $kendaraan->merk_kendaraan }}" readonly>
+                    <input type="text" class="form-control" id="merk_kendaraan" name="merk_kendaraan" readonly>
                 </div>
 
                 <!-- Harga Sewa per Hari -->
                 <div class="mb-3">
                     <label for="harga" class="form-label">Harga Sewa per Hari (Rp)</label>
-                    <input type="text" class="form-control" id="harga" name="harga" value="{{ $kendaraan->harga }}" readonly>
+                    <input type="text" class="form-control" id="harga" name="harga" readonly>
                 </div>
 
                 <!-- Tanggal Sewa -->
