@@ -98,19 +98,19 @@ class KendaraanController extends Controller
     }
 
     public function apiIndex()
-{
-    $kendaraan = \App\Models\Kendaraan::all();
-    return response()->json($kendaraan);
-}
-
-public function apiShow($id)
-{
-    $kendaraan = \App\Models\Kendaraan::find($id);
-    if (!$kendaraan) {
-        return response()->json(['message' => 'Not found'], 404);
+    {
+        $kendaraan = \App\Models\Kendaraan::where('status', 'Tersedia')->get();
+        return response()->json($kendaraan);
     }
-    return response()->json($kendaraan);
-}
+
+    public function apiShow($id)
+    {
+        $kendaraan = \App\Models\Kendaraan::find($id);
+        if (!$kendaraan) {
+            return response()->json(['message' => 'Not found'], 404);
+        }
+        return response()->json($kendaraan);
+    }
 
     // API: Tambah kendaraan (untuk admin)
     public function apiStore(Request $request)
